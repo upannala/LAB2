@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var vehicleName = "Toyota";
+
+    function printVehicleNameOuter() {
+        console.log(this.vehicleName);
+    }
+
+    console.log(this);
+    printVehicleNameOuter();
+
+    var vehicle = {
+        vehicleName: 'Nissan',
+        printVehicleNameInner: function () {
+            return function () {
+                console.log(this.vehicleName);
+            }
+        }
+    };
+    var execute = vehicle.printVehicleNameInner().bind(vehicle);
+
+    execute();
+
+    function taxCalculator(tax) {
+        var taxPercentage = tax;
+        return function (amount) {
+            return amount * tax / 100
+
+        }
+
+    }
+
+    var calculator = taxCalculator(10);
+    console.log(calculator(90));
+
+    function fetchUsers() {
+        fetch('https://api.github.com/users').then(function (response) {
+            return response.json();
+        }).then(function (json) {
+            console.log(json);
+        });
+    }
+
+    fetchUsers
+    ();
+
+    function Vehicle(type) {
+
+        Vehicle.VehicleCount++;
+        this.type = type;
+    }
+
+    Vehicle.VehicleCount = 0;
+    Vehicle.prototype.drive = function () {
+        console.log('vehicle is driving');
+    };
+
+    var vehicle = new Vehicle('Toyota');
+
+    function car(type) {
+        Vehicle.call(this.type);
+
+    }
+
+    Car.prototype = Object.create(Vehicle.prototype);
+    Car.prototype.constructor = Car;
+    Car.prototype.balanceWheels = function () {
+        console.log('Wheels are balanced');
+    }
+
+
+    var car = new Car('Nissan');
+    car.drive();
+    car.balanceWheels();
+    console.log(car.type, vehicle.VehicleCount);
+
+    //let vehicleName = 'Toyota';
+    vehicleName = 'Nissan';
+    const COUNTRY = 'Japan';
+
+
+    function fetchUsers() {
+        returnfetch
+        ('https://api.github.com/users').then(response => response.json());
+    }
+
+    fetchUsers().then(json => {
+        console.log(json);
+    });
+
+    async function
+    fetchUsersAsync() {
+        const response = await fetch('https://api.github.com/users');
+        const json = await response.json();
+        console.log(json);
+    }
+
+    fetchUsersAsync();
+
+    class Vehicle {
+        constructor
+        (type) {
+            Vehicle.VehicleCount++;
+            this.type = type;
+        }
+
+        drive() {
+            console.log('Vehicle is driving');
+        }
+    }
+
+    Vehicle.VehicleCount = 0;
+    const vehicle = new Vehicle('Toyota');
+    vehicle.drive();
+    console.log(Vehicle.VehicleCount);
+
+    class Car extends Vehicle {
+        constructor(type) {
+            super(type);
+        }
+
+        balanceWheels() {
+            console.log('Wheels are balanced');}
+    }
+
+    const car = new Car('Nissan');
+    car.drive();
+    car.balanceWheels();
+    console.log(Vehicle.VehicleCount);
+
+
+</script>
+
+
+</body>
+</html>
